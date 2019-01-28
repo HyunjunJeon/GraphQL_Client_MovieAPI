@@ -1,5 +1,36 @@
 import React from "react";
+import styled from "styled-components";
+import { Query } from "react-apollo";
+import { HOME_PAGE } from "./queries"
+import Movie from "./Movie"
 
-const Home = () => <div>Home</div>;
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 0.7ft);
+    flex-wrap: wrap;
+    justify-items: center;
+`;
+
+
+const Home = () => (
+    <Container>
+        <Query query={HOME_PAGE}>
+            {
+                ({loading,data,error}) => {
+                    if(loading) return "loading....";
+                    if(error) return "Errors......";
+                    return data.movies.map(movie => (
+                        <Movie 
+                            id={movie.id}    
+                            key={movie.id}
+                            poster={movie.medium_cover_image}
+                            title={movie.title}
+                        />
+                    ))
+                }
+            }
+        </Query>
+    </Container>
+);
 
 export default Home;

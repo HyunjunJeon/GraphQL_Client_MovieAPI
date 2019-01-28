@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { ApolloProvider } from "react-apollo"
 import { HashRouter as Router, Route } from "react-router-dom";
 import client from "./ApolloClient"
@@ -11,10 +11,10 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
           <Router>
-            <Fragment>
+            <main>
               <Route exact={true} path={"/"} component={Home} />
               <Route path={"/details/:movieId"} component={Detail} />
-            </Fragment>
+            </main>
           </Router>
       </ApolloProvider>
     );
